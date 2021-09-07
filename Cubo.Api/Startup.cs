@@ -32,10 +32,29 @@ namespace Cubo.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+           services.AddMemoryCache();
             services.AddScoped<IUserRepository, UserRepository>();
             services.Configure<AppSettings>(Configuration.GetSection("app"));
+          
+            
+            
+            //services.Configure<SqlSettings>(Configuration.GetSection("sql"));
+            //services.AddControllersWithViews();
+            //services.AddScoped<IBucketRepository, SqlBucketRepository>();
+            //services.AddScoped<IBucketService, BucketService>();
+            //services.AddScoped<IItemService, ItemService>();
+            //services.AddSingleton<IMapper>(_ => AutoMapperConfig.GetMapper());
+            //services.AddScoped<IDataInitializer, DataInitializer>();
+            //services.AddEntityFrameworkSqlServer()
+            //         .AddEntityFrameworkInMemoryDatabase()
+            //        .AddDbContext<CuboContext>();
+            //var builder = new ContainerBuilder();
+            //builder.RegisterType<UserRepository>().As<IUserRepository>();
+            //builder.Populate(services);
+            //Container = builder.Build();
 
-           
+            //return new AutofacServiceProvider(Container);
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
