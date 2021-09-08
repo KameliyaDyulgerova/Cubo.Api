@@ -52,12 +52,7 @@ namespace Cubo.Api
             //services.AddEntityFrameworkSqlServer()
             //         .AddEntityFrameworkInMemoryDatabase()
             //        .AddDbContext<CuboContext>();
-            //var builder = new ContainerBuilder();
-            //builder.RegisterType<UserRepository>().As<IUserRepository>();
-            //builder.Populate(services);
-            //Container = builder.Build();
-
-            //return new AutofacServiceProvider(Container);
+           
 
 
             services.AddControllers();

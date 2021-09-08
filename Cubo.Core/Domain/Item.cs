@@ -14,17 +14,17 @@ namespace Cubo.Core.Domain
 
         public Item(Guid bucketId, string key, string value)
         {
-            //if (string.IsNullOrWhiteSpace(key))
-            //{
-            //    throw new Exception(//"empty_item_key",
-            //        "Item can not have an empty key.");
-            //}
-            //if (string.IsNullOrWhiteSpace(value))
-            //{
-            //    throw new Exception(//"empty_item_value",
-            //        "Item can not have an empty value.");
-            //}
-            //BucketId = bucketId;
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new CuboException("empty_item_key",
+                    "Item can not have an empty key.");
+            }
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new CuboException("empty_item_value",
+                    "Item can not have an empty value.");
+            }
+            BucketId = bucketId;
             Key = key.ToLowerInvariant();
             Value = value;
         }

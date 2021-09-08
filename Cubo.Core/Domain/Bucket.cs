@@ -22,14 +22,19 @@ namespace Cubo.Core.Domain
 
         public Bucket(Guid id, string name)
         {
-            //if (string.IsNullOrWhiteSpace(name))
-            //{
-            //    throw new Exception(//"empty_bucket_name",
-            //        "Bucket can not have an empty name.");
-            //}
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new CuboException("empty_bucket_name",
+                    "Bucket can not have an empty name.");
+            }
             Id = id;
-            Name = name;//.ToLowerInvariant();
-            //CreatedAt = DateTime.UtcNow;
+            Name = name.ToLowerInvariant();
+            CreatedAt = DateTime.UtcNow;
+        }
+
+        public void ShouldBeEquivalentTo(Bucket createdBucket)
+        {
+            throw new NotImplementedException();
         }
 
         public Item GetItemOrFail(string key)
@@ -58,7 +63,7 @@ namespace Cubo.Core.Domain
 
         public void RemoveItem(string key)
         {
-           // var fixedKey = key.ToLowerInvariant();
+            var fixedKey = key.ToLowerInvariant();
             var item = GetItemOrFail(key);
             _items.Remove(item);
         }
