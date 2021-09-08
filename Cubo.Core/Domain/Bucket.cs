@@ -28,7 +28,7 @@ namespace Cubo.Core.Domain
             //        "Bucket can not have an empty name.");
             //}
             Id = id;
-            Name = name.ToLowerInvariant();
+            Name = name;//.ToLowerInvariant();
             //CreatedAt = DateTime.UtcNow;
         }
 
@@ -38,7 +38,7 @@ namespace Cubo.Core.Domain
             var item = Items.SingleOrDefault(x => x.Key == fixedKey);
             if (item == null)
             {
-                throw new Exception(//"item_not_found",
+                throw new CuboException("item_not_found",
                     $"Item with key '{key}' was not found in bucket '{Name}'.");
             }
 
@@ -50,7 +50,7 @@ namespace Cubo.Core.Domain
             var fixedKey = key.ToLowerInvariant();
             if (Items.Any(x => x.Key == fixedKey))
             {
-                throw new Exception(//"item_already_exists",
+                throw new CuboException("item_already_exists",
                     $"Item with key '{key}' already exists.");
             }
             _items.Add(new Item(Id, fixedKey, value));
@@ -58,7 +58,7 @@ namespace Cubo.Core.Domain
 
         public void RemoveItem(string key)
         {
-            var fixedKey = key.ToLowerInvariant();
+           // var fixedKey = key.ToLowerInvariant();
             var item = GetItemOrFail(key);
             _items.Remove(item);
         }

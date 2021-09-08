@@ -1,7 +1,11 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using Cubo.Api.Repositories;
 using Cubo.Api.Settings;
+using Cubo.Core.Mappers;
+using Cubo.Core.Repositories;
+using Cubo.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -40,10 +44,10 @@ namespace Cubo.Api
             
             //services.Configure<SqlSettings>(Configuration.GetSection("sql"));
             //services.AddControllersWithViews();
-            //services.AddScoped<IBucketRepository, SqlBucketRepository>();
-            //services.AddScoped<IBucketService, BucketService>();
-            //services.AddScoped<IItemService, ItemService>();
-            //services.AddSingleton<IMapper>(_ => AutoMapperConfig.GetMapper());
+            services.AddSingleton<IBucketRepository, InMemoryBucketRepository>();
+            services.AddScoped<IBucketService, BucketService>();
+            services.AddScoped<IItemService, ItemService>();
+            services.AddSingleton<IMapper>(_ => AutoMapperConfig.GetMapper());
             //services.AddScoped<IDataInitializer, DataInitializer>();
             //services.AddEntityFrameworkSqlServer()
             //         .AddEntityFrameworkInMemoryDatabase()

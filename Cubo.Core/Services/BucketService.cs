@@ -35,7 +35,7 @@ namespace Cubo.Core.Services
             var bucket = await _bucketRepository.GetAsync(name);
             if (bucket != null)
             {
-                throw new Exception(//"bucket_already_exists", 
+                throw new CuboException("bucket_already_exists", 
                     $"Bucket '{name}' already exists.");
             }
             bucket = new Bucket(Guid.NewGuid(), name);

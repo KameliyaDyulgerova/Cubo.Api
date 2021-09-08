@@ -11,7 +11,7 @@ namespace Cubo.Core.Repositories
             var bucket = await repository.GetAsync(name);
             if (bucket == null)
             {
-                throw new Exception(//"bucket_not_found",
+                throw new CuboException("bucket_not_found",
                     $"Bucket: '{name}' was not found.");
             }
 
