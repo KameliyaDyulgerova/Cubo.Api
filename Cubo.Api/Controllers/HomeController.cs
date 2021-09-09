@@ -18,3 +18,4 @@ namespace Cubo.Controllers
         => Content($"Welcome to the Accountant API! [{_settings.AppEnv}]");
     }
 }
+

@@ -3,6 +3,8 @@ using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using Cubo.Api.Repositories;
 using Cubo.Api.Settings;
+using Cubo.Core.EF;
+//using Cubo.Core.EF;
 using Cubo.Core.Mappers;
 using Cubo.Core.Repositories;
 using Cubo.Core.Services;
@@ -10,6 +12,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -38,20 +41,14 @@ namespace Cubo.Api
             services.AddMvc();
            services.AddMemoryCache();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.Configure<AppSettings>(Configuration.GetSection("app"));
-          
-            
-            
-            //services.Configure<SqlSettings>(Configuration.GetSection("sql"));
-            //services.AddControllersWithViews();
+            services.Configure<SqlSettings>(Configuration.GetSection("ConnectionStrings"));
             services.AddSingleton<IBucketRepository, InMemoryBucketRepository>();
             services.AddScoped<IBucketService, BucketService>();
             services.AddScoped<IItemService, ItemService>();
             services.AddSingleton<IMapper>(_ => AutoMapperConfig.GetMapper());
-            //services.AddScoped<IDataInitializer, DataInitializer>();
-            //services.AddEntityFrameworkSqlServer()
-            //         .AddEntityFrameworkInMemoryDatabase()
-            //        .AddDbContext<CuboContext>();
+           services.AddScoped<IDataInitializer, DataInitializer>();
+            services.AddEntityFrameworkSqlServer()
+               .AddDbContext<CuboContext>();
            
 
 
@@ -73,6 +70,7 @@ namespace Cubo.Api
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
